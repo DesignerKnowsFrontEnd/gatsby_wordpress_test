@@ -20,8 +20,22 @@ const Layout = ({ children }) => {
           title
         }
       }
+      allWordpressMenusMenusItems{
+        edges {
+          node{
+            id
+            name
+            items{
+              title
+              slug
+              url
+            }
+          }
+        }
+      }
     }
   `)
+    const wpMenu = this.props.menu.allWordpressMenusMenusItems.edges[0].node.items
 
   return (
     <>
