@@ -1,27 +1,37 @@
-import React, { Component } from "react"
-import { Link, StaticQuery, graphql } from 'gatsby'
+import React from "react"
+import { StaticQuery, graphql, Link } from "gatsby"
 
-class MainMenu extends Component {
-    render() {
-
-        const data = this.props.menu.allWordpressMenusMenusItems.edges[0].node.items
-        console.log(data)
-
-        return (
-            <div>
-                <h1>Main Menu</h1>
-                <ul>
-                    {data.map((item) =>
-                        <li key={item.object_slug}>
-                            <Link to={item.url}>
-                                {item.title}
-                            </Link>
-                        </li>
-                    )}
-                </ul>
-            </div>
-        )
-    }
+const MainMenu = () => (
+  <StaticQuery
+    query={graphql`
+      {
+        allWordpressWpApiMenusMenusItems {
+          edges {
+            node {
+              items {
+                order
+                title
+                url
+                object_slug
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={props => 
+         <div>
+            {props.allWordpressWpApiMenusMenusItems.edges[2].node.items.map(item => (
+              <Link
+                to={item.url}
+                key={item.object_slug}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
 }
+  ></StaticQuery>
+)
 
 export default MainMenu
