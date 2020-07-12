@@ -5,13 +5,22 @@ class PageTemplate extends Component {
     render() {
         const siteMetadata = this.props.data.site.siteMetadata
         const currentPage = this.props.data.wordpressPage
+         
 
-        console.log(currentPage)
+      
+
+        // if (currentPage.slug === '/' ) {
+        //     let heroTitle = ' currentPage.acf.hero_title'
+        // } else {
+        //     let heroTitle = '' 
+        // }
 
         return (
             <Layout>
                 <div>
                     <h1 dangerouslySetInnerHTML={{__html: currentPage.title}}/>
+                    {/* <h1 dangerouslySetInnerHTML={{__html: heroTitle }}/> */}
+                    
                     <div dangerouslySetInnerHTML={{__html: currentPage.content}}/>
 
                     <p dangerouslySetInnerHTML={{__html: currentPage.date}} />
@@ -32,6 +41,9 @@ export const pageQuery = graphql`
             slug
             id
             date(formatString: "MMMM DD, YYYY")
+            acf {
+                hero_title
+            }
         }
         site {
             id
