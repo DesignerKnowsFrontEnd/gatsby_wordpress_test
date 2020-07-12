@@ -5,21 +5,22 @@ class PageTemplate extends Component {
     render() {
         const siteMetadata = this.props.data.site.siteMetadata
         const currentPage = this.props.data.wordpressPage
-         
+        let heroTitle = ''
 
       
 
-        // if (currentPage.slug === '/' ) {
-        //     let heroTitle = ' currentPage.acf.hero_title'
-        // } else {
-        //     let heroTitle = '' 
-        // }
+        if (currentPage.acf !== null ) {
+            if (currentPage.acf.hero_title !== '') {
+                heroTitle = currentPage.acf.hero_title
+            }
+        } 
+        
 
         return (
             <Layout>
                 <div>
                     <h1 dangerouslySetInnerHTML={{__html: currentPage.title}}/>
-                    {/* <h1 dangerouslySetInnerHTML={{__html: heroTitle }}/> */}
+                    <h1 dangerouslySetInnerHTML={{__html: heroTitle }}/>
                     
                     <div dangerouslySetInnerHTML={{__html: currentPage.content}}/>
 
